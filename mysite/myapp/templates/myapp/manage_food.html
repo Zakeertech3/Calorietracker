@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Food Items</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #007bff, #6c63ff);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .btn-custom {
+            background: linear-gradient(135deg, #6c63ff, #007bff);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .btn-custom:hover {
+            background: linear-gradient(135deg, #007bff, #6c63ff);
+        }
+        .container {
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+        }
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Manage Food Items</h1>
+        <a href="{% url 'home' %}" class="btn btn-custom">Back to Home</a>
+    </div>
+
+    <div class="container">
+        <h2>Add New Food Item</h2>
+        <form method="post" class="mb-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Add Food</button>
+        </form>
+
+        <h2>Existing Food Items</h2>
+        {% if food_items %}
+        <div class="row">
+            {% for food in food_items %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ food.name }}</h5>
+                        <p class="card-text">
+                            <strong>Carbs:</strong> {{ food.carbs }} g<br>
+                            <strong>Protein:</strong> {{ food.protein }} g<br>
+                            <strong>Fats:</strong> {{ food.fats }} g<br>
+                            <strong>Calories:</strong> {{ food.calories }} KCal<br>
+                            <strong>Added On:</strong> {{ food.date_added|date:"F j, Y" }}
+                        </p>
+                        <a href="{% url 'delete_food' food.id %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this food item?');">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>No food items available. Add your first food item!</p>
+        {% endif %}
+    </div>
+</body>
+</html>
