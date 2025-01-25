@@ -98,13 +98,3 @@ Deployment on Render/Heroku faced challenges during testing.
 
 🌟 Connect with Me
 LinkedIn: https://www.linkedin.com/in/mohammed-zakeer/
-
----
-
-### **Why Markdown is Better for README**
-- **Easy to read**: GitHub and most platforms render Markdown beautifully.
-- **Professional**: It uses clean and concise formatting.
-- **Cross-platform**: Works on GitHub, VS Code, and other platforms.
-- **Emojis**: Adds visual flair without overcomplicating the design.
-
-Let me know if you'd like to make further adjustments! 😊
